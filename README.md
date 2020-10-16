@@ -20,3 +20,52 @@ This is a model of a Typical Home Network implemented in Cadmium
 	- WIP
 - top_model [*This folder contains the Typical Home Network top model*]	
 	- WIP
+
+## Steps to Compile and Run
+
+0. TypicalHomeNetwork.pdf contains the explanation of this model.
+
+1. Update include path in the makefile in this folder. You need to update the following lines:
+
+	`INCLUDECADMIUM=-I ../../cadmium/include
+	INCLUDEDESTIMES=-I ../../DESTimes/include`
+
+	Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process.
+
+	Example: 
+
+	`INCLUDECADMIUM=-I ../../cadmium/include`
+
+	Do the same for the DESTimes library.
+
+2. Compile the project and the tests.
+	1. Open a terminal in the 'TypicalHomeNetwork' folder.
+	2. To compile the project and the tests type:
+
+		`make clean; make all`
+
+3. Run the tests.
+	1. Open a terminal in the 'TypicalHomeNetwork/bin' folder.
+	2. To run a test, type:
+		
+		`./NAME_OF_THE_COMPILED_FILE` (For windows, `./NAME_OF_THE_COMPILED_FILE.exe`).
+	
+		For example, to run the router test, type:
+
+		`./ROUTER_TEST`
+	3. To check the output of the test, go to the 'simulation_results' folder and open 'router_test_output_messages.txt' and 'router_test_output_state.txt'.
+
+4. Run the top model.
+	1. Open a terminal in the 'bin' folder.
+	2. To run the model, type:
+	
+		`./NAME_OF_THE_COMPILED_FILE PATH_OF_THE_INPUT_FILE`
+		
+		For this test you need to type:
+
+		`./THN ../input_data/input_thn_0.txt`
+	3. To check the output of the model, go to the 'simulation_results' folder and open 'thn_output_messages.txt' and thn_output_state.txt'.
+	4. To run the model with different inputs:
+		1. Create new '.txt' files with the same structure as input_thn_0.txt in the folder input_data.
+		2. Follow the instructions from step 2
+		3. If you want to keep the output, rename the output '.txt' files to prevent them from being overwritten.
