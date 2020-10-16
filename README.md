@@ -1,0 +1,1 @@
+# Typical Home Network
