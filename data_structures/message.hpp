@@ -1,0 +1,23 @@
+#ifndef BOOST_SIMULATION_MESSAGE_HPP
+#define BOOST_SIMULATION_MESSAGE_HPP
+
+#include <assert.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Message_t{
+    Message_t(){}
+
+    Message_t(int i_packetType, int i_dest) : packetType(i_packetType), dest(i_dest){}
+    
+    int packetType;
+    int dest;
+};
+
+istream& operator>>(istream& is, Message_t& msg);
+
+ostream& operator<<(ostream& os, const Message_t& msg);
+
+#endif
