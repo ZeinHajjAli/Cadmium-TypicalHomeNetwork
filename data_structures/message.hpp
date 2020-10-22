@@ -10,10 +10,10 @@ using namespace std;
 struct Message_t{
     Message_t(){}
 
-    Message_t(int i_packetType, int i_dest) : packetType(i_packetType), dest(i_dest){}
+    Message_t(int i_packetType, int i_data) : packetType(i_packetType), data(i_data){}
     
     int packetType;
-    int dest;
+    int data;
 };
 
 istream& operator>>(istream& is, Message_t& msg);

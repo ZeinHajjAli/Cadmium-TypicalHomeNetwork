@@ -13,9 +13,16 @@ results_folder := $(shell mkdir -p simulation_results)
 message.o: data_structures/message.cpp
 	$(CC) -g  -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) data_structures/message.cpp -o build/message.o
 
+main_personalDevice_test.o: test/main_personalDevice_test.cpp
+	$(CC) -g -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) test/main_personalDevice_test.cpp -o build/main_personalDevice_test.o
+
+tests: main_personalDevice_test.o message.o
+	$(CC) -g -o bin/PERSONALDEVICE_TEST build/main_personalDevice_test.o build/message.o
+
 #TARGET TO COMPILE ONLY TYPICAL HOME NETWORK (THN) SIMULATOR
 
 #TARGET TO COMPILE EVERYTHING (THN SIMULATOR + TESTS TOGETHER)
+all: tests
 
 #CLEAN COMMANDS
 clean:

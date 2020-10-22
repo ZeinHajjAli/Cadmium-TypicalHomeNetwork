@@ -8,13 +8,13 @@
 
 // Output stream
 ostream& operator<<(ostream& os, const Message_t& msg) {
-    os << msg.dest << " " << msg.packetType;
+    os << msg.packetType << " " << msg.data;
     return os;
 }
 
 // Input stream
 istream& operator>>(istream& is, Message_t& msg) {
-    is >> msg.dest;
     is >> msg.packetType;
+    is >> msg.data;
     return is;
 }
