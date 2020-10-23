@@ -13,7 +13,7 @@
 
 //Atomic model headers
 #include <cadmium/basic_model/pdevs/iestream.hpp> //Atomic model for inputs
-#include "../atomics/personalDevice.hpp"
+#include "../atomics/router.hpp"
 
 //C++ libraries
 #include <iostream>
@@ -28,50 +28,50 @@ using TIME = NDTime;
 /***** Define input port for coupled models *****/
 
 /***** Define output ports for coupled model *****/
-struct outp_request : public cadmium::out_port<Message_t>{};
-struct outp_userResponse : public cadmium::out_port<int>{};
+struct outp_lanOut : public cadmium::out_port<Message_t>{};
+struct outp_routerOut : public cadmium::out_port<Message_t>{};
 
 /****** Input Reader atomic model declaration *******************/
 template<typename T>
-class InputReader_Message_t : public iestream_input<Message_t, T> {
+class InputReader_lan : public iestream_input<Message_t, T> {
     public:
-        InputReader_Message_t () = default;
-        InputReader_Message_t (const char* file_path) : iestream_input<Message_t, T>(file_path) {}
+        InputReader_lan () = default;
+        InputReader_lan (const char* file_path) : iestream_input<Message_t, T>(file_path) {}
 };
 
 template<typename T>
-class InputReader_Int : public iestream_input<int,T> {
+class InputReader_router : public iestream_input<Message_t,T> {
     public:
-        InputReader_Int () = default;
-        InputReader_Int (const char* file_path) : iestream_input<int,T>(file_path) {}
+        InputReader_router () = default;
+        InputReader_router (const char* file_path) : iestream_input<Message_t, T>(file_path) {}
 };
 
 int main(){
 
 
     /****** Input Reader atomic models instantiation *******************/
-    const char * i_input_data_userInput = "../input_data/personalDevice_input_test_userInput_In.txt";
-    shared_ptr<dynamic::modeling::model> input_reader_userInput = dynamic::translate::make_dynamic_atomic_model<InputReader_Int, TIME, const char* >("input_reader_userInput" , move(i_input_data_userInput));
+    const char * i_input_data_lanInput = "../input_data/router_input_test_lan_In.txt";
+    shared_ptr<dynamic::modeling::model> input_reader_lanInput = dynamic::translate::make_dynamic_atomic_model<InputReader_lan, TIME, const char* >("input_reader_lanInput" , move(i_input_data_lanInput));
 
-    const char * i_input_data_response = "../input_data/personalDevice_input_test_response_In.txt";
-    shared_ptr<dynamic::modeling::model> input_reader_response = dynamic::translate::make_dynamic_atomic_model<InputReader_Message_t , TIME, const char* >("input_reader_response" , move(i_input_data_response));
+    const char * i_input_data_routerInput = "../input_data/router_input_test_router_In.txt";
+    shared_ptr<dynamic::modeling::model> input_reader_routerInput = dynamic::translate::make_dynamic_atomic_model<InputReader_router , TIME, const char* >("input_reader_routerInput" , move(i_input_data_routerInput));
 
 
-    /****** PersonalDevice atomic model instantiation *******************/
-    shared_ptr<dynamic::modeling::model> personalDevice1 = dynamic::translate::make_dynamic_atomic_model<PersonalDevice, TIME>("personalDevice1");
+    /****** Router atomic model instantiation *******************/
+    shared_ptr<dynamic::modeling::model> router1 = dynamic::translate::make_dynamic_atomic_model<Router, TIME>("router1");
 
     /*******TOP MODEL********/
     dynamic::modeling::Ports iports_TOP = {};
-    dynamic::modeling::Ports oports_TOP = {typeid(outp_request), typeid(outp_userResponse)};
-    dynamic::modeling::Models submodels_TOP = {input_reader_userInput, input_reader_response, personalDevice1};
+    dynamic::modeling::Ports oports_TOP = {typeid(outp_lanOut), typeid(outp_routerOut)};
+    dynamic::modeling::Models submodels_TOP = {input_reader_lanInput, input_reader_routerInput, router1};
     dynamic::modeling::EICs eics_TOP = {};
     dynamic::modeling::EOCs eocs_TOP = {
-        dynamic::translate::make_EOC<PersonalDevice_defs::request_out, outp_request>("personalDevice1"),
-        dynamic::translate::make_EOC<PersonalDevice_defs::userResponse_out, outp_userResponse>("personalDevice1"),
+        dynamic::translate::make_EOC<Router_defs::lanOut_out, outp_lanOut>("router1"),
+        dynamic::translate::make_EOC<Router_defs::routerOut_out, outp_routerOut>("router1"),
     };
     dynamic::modeling::ICs ics_TOP = {
-        dynamic::translate::make_IC<iestream_input_defs<int>::out, PersonalDevice_defs::userInput_in>("input_reader_userInput","personalDevice1"),
-        dynamic::translate::make_IC<iestream_input_defs<Message_t>::out, PersonalDevice_defs::response_in>("input_reader_response","personalDevice1")
+        dynamic::translate::make_IC<iestream_input_defs<Message_t>::out, Router_defs::lanIn_in>("input_reader_lanInput","router1"),
+        dynamic::translate::make_IC<iestream_input_defs<Message_t>::out, Router_defs::routerIn_in>("input_reader_routerInput","router1")
     };
     shared_ptr<dynamic::modeling::coupled<TIME>> TOP;
     TOP = make_shared<dynamic::modeling::coupled<TIME>>(
@@ -79,13 +79,13 @@ int main(){
     );
 
     /*************** Loggers *******************/
-    static ofstream out_messages("../simulation_results/personalDevice_test_output_messages.txt");
+    static ofstream out_messages("../simulation_results/router_test_output_messages.txt");
     struct oss_sink_messages{
         static ostream& sink(){          
             return out_messages;
         }
     };
-    static ofstream out_state("../simulation_results/personalDevice_test_output_state.txt");
+    static ofstream out_state("../simulation_results/router_test_output_state.txt");
     struct oss_sink_state{
         static ostream& sink(){          
             return out_state;
