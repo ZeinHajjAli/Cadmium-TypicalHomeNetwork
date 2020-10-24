@@ -1,0 +1,68 @@
+00:00:00:000
+State for model input_reader_lanInput is next time: 00:00:00:000
+State for model input_reader_routerInput is next time: 00:00:00:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 0
+00:00:00:000
+State for model input_reader_lanInput is next time: 00:00:10:000
+State for model input_reader_routerInput is next time: 00:00:13:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 0
+00:00:10:000
+State for model input_reader_lanInput is next time: 00:00:20:000
+State for model input_reader_routerInput is next time: 00:00:13:000
+State for model router1 is sending: 1 & sendingLan: 0 & data: 1
+00:00:13:000
+State for model input_reader_lanInput is next time: 00:00:20:000
+State for model input_reader_routerInput is next time: 00:00:23:000
+State for model router1 is sending: 1 & sendingLan: 0 & data: 1
+00:00:15:000
+State for model input_reader_lanInput is next time: 00:00:20:000
+State for model input_reader_routerInput is next time: 00:00:23:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 1
+00:00:30:000
+State for model input_reader_lanInput is next time: 00:01:00:000
+State for model input_reader_routerInput is next time: 00:00:23:000
+State for model router1 is sending: 1 & sendingLan: 0 & data: 2
+00:00:35:000
+State for model input_reader_lanInput is next time: 00:01:00:000
+State for model input_reader_routerInput is next time: 00:00:23:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 2
+00:00:36:000
+State for model input_reader_lanInput is next time: 00:01:00:000
+State for model input_reader_routerInput is next time: 00:01:05:000
+State for model router1 is sending: 1 & sendingLan: 1 & data: 2
+00:00:41:000
+State for model input_reader_lanInput is next time: 00:01:00:000
+State for model input_reader_routerInput is next time: 00:01:05:000
+State for model router1 is sending: 0 & sendingLan: 1 & data: 2
+00:01:30:000
+State for model input_reader_lanInput is next time: 00:01:30:000
+State for model input_reader_routerInput is next time: 00:01:05:000
+State for model router1 is sending: 1 & sendingLan: 0 & data: 3
+00:01:35:000
+State for model input_reader_lanInput is next time: 00:01:30:000
+State for model input_reader_routerInput is next time: 00:01:05:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 3
+00:01:41:000
+State for model input_reader_lanInput is next time: 00:01:30:000
+State for model input_reader_routerInput is next time: 00:00:19:000
+State for model router1 is sending: 1 & sendingLan: 1 & data: 3
+00:01:46:000
+State for model input_reader_lanInput is next time: 00:01:30:000
+State for model input_reader_routerInput is next time: 00:00:19:000
+State for model router1 is sending: 0 & sendingLan: 1 & data: 3
+00:02:00:000
+State for model input_reader_lanInput is next time: 00:01:30:000
+State for model input_reader_routerInput is next time: inf
+State for model router1 is sending: 1 & sendingLan: 1 & data: 4
+00:02:05:000
+State for model input_reader_lanInput is next time: 00:01:30:000
+State for model input_reader_routerInput is next time: inf
+State for model router1 is sending: 0 & sendingLan: 1 & data: 4
+00:03:00:000
+State for model input_reader_lanInput is next time: inf
+State for model input_reader_routerInput is next time: inf
+State for model router1 is sending: 1 & sendingLan: 0 & data: 4
+00:03:05:000
+State for model input_reader_lanInput is next time: inf
+State for model input_reader_routerInput is next time: inf
+State for model router1 is sending: 0 & sendingLan: 0 & data: 4

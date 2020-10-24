@@ -28,9 +28,8 @@ template<typename TIME> class Router{
 
         // Default constructor
         Router() noexcept{
-          preparationTime = TIME("00:00:10");
+          preparationTime = TIME("00:00:05");
           state.next_internal = std::numeric_limits<TIME>::infinity();
-          state.model_active = false;
           state.sending = false;
         //   state.sendingLan = true;
         }
@@ -39,7 +38,6 @@ template<typename TIME> class Router{
         struct state_type{
             bool sending;
             bool sendingLan;
-            bool model_active;
             Message_t message;
             TIME next_internal;
         }; 
@@ -59,32 +57,28 @@ template<typename TIME> class Router{
 
         // External transition
         void external_transition(TIME e, typename make_message_bags<input_ports>::type mbs) { 
-                if ((get_messages<typename Router_defs::lanIn_in>(mbs).size() + get_messages<typename Router_defs::routerIn_in>(mbs).size()) > 1)
-                    assert(false && "One message per time unit");
-
+            if ((get_messages<typename Router_defs::lanIn_in>(mbs).size() + get_messages<typename Router_defs::routerIn_in>(mbs).size()) > 1)
+                assert(false && "One message per time unit");
+            if (!state.sending) {
                 for (const auto &x : get_messages<typename Router_defs::lanIn_in>(mbs)) {
-                    if (!state.sending) {
-                        state.sendingLan = false;
-                        state.message = x;
-                        state.sending = true;
-                        
-                        state.next_internal = preparationTime;
-                    } else {
-                        state.next_internal = std::numeric_limits<TIME>::infinity();
-                    }
+                
+                    state.sendingLan = false;
+                    state.message = x;
+                    state.sending = true;
+                    
+                    state.next_internal = preparationTime;
                 }
 
                 for (const auto &x : get_messages<typename Router_defs::routerIn_in>(mbs)) {
-                    if (!state.sending) {
-                        state.sendingLan = true;
-                        state.message = x;
-                        state.sending = true;
+                    state.sendingLan = true;
+                    state.message = x;
+                    state.sending = true;
 
-                        state.next_internal = preparationTime;
-                    } else {
-                        state.next_internal = std::numeric_limits<TIME>::infinity();
-                    }
+                    state.next_internal = preparationTime;
                 }
+            } else if (state.next_internal != std::numeric_limits<TIME>::infinity()) {
+                state.next_internal = state.next_internal - e;
+            }
         }
 
         // Confluence transition

@@ -27,7 +27,7 @@ template<typename TIME> class Modem{
 
         // Default constructor
         Modem() noexcept{
-          timeout = TIME("00:00:50");
+          timeout = TIME("00:00:30");
           state.next_internal = std::numeric_limits<TIME>::infinity();
           state.model_active = false;
           state.sending = false;
@@ -48,11 +48,8 @@ template<typename TIME> class Modem{
 
         // Internal transition
         void internal_transition() {
-            if (state.sending) {
-                state.sending = false;
-                
-            }
             state.model_active = false;
+            state.sending = false;
             state.next_internal = std::numeric_limits<TIME>::infinity();
         }
 
@@ -68,10 +65,10 @@ template<typename TIME> class Modem{
             for (const auto &x : get_messages<typename Modem_defs::modemIn_in>(mbs)) {
                 if (!state.model_active) {
                     state.message = x;
-                    state.model_active = true;
                     randWaitTime = rand() % 45 + 5;
                     string timeString = "00:00:" + to_string(randWaitTime);
                     waitTime = TIME(timeString);
+                    state.model_active = true;
 
                     if (waitTime <= timeout) {
                         state.sending = true;
@@ -81,6 +78,8 @@ template<typename TIME> class Modem{
                         state.next_internal = timeout;
                     }
                         
+                } else if (state.next_internal != std::numeric_limits<TIME>::infinity()) {
+                    state.next_internal = state.next_internal - e;
                 }
             }
         }
@@ -101,7 +100,7 @@ template<typename TIME> class Modem{
                 get_messages<typename Modem_defs::modemOut1_out>(bags).push_back(out);
                 out = state.message;
                 get_messages<typename Modem_defs::modemOut2_out>(bags).push_back(out);
-            }
+            }  
 
             return bags;
         }
@@ -112,7 +111,7 @@ template<typename TIME> class Modem{
         }
 
         friend std::ostringstream& operator<<(std::ostringstream& os, const typename Modem<TIME>::state_type& i) {
-            os << "sending: " << i.sending << " & message: " << i.message;
+            os << "model_active: " << i.model_active << " & sending: " << i.sending << " & message: " << i.message;
             return os;
         }
 };

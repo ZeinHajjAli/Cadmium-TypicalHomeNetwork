@@ -2,4 +2,3 @@
 *.exe
 bin/*
 build/*
-simulation_results/*

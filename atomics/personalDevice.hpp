@@ -30,7 +30,7 @@ template<typename TIME> class PersonalDevice{
         // Default constructor
         PersonalDevice() noexcept{
           preparationTime = TIME("00:00:05");
-          timeout = TIME("00:00:30");
+          timeout = TIME("00:01:00");
           state.data = -1;
           state.next_internal = std::numeric_limits<TIME>::infinity();
           state.model_active = false;
@@ -75,7 +75,7 @@ template<typename TIME> class PersonalDevice{
                 for (const auto &x : get_messages<typename PersonalDevice_defs::userInput_in>(mbs)) {
                     if (!state.model_active) {
                         state.data = x;
-                        if (state.data != -1) {
+                        if (state.data >= 0) {
                             state.ack = false;
                             state.sending = true;
                             state.model_active = true;
@@ -83,6 +83,8 @@ template<typename TIME> class PersonalDevice{
                         } else if (state.next_internal != std::numeric_limits<TIME>::infinity()) {
                             state.next_internal = state.next_internal - e;
                         }
+                    } else if (state.next_internal != std::numeric_limits<TIME>::infinity()) {
+                        state.next_internal = state.next_internal - e;
                     }
                 }
 
@@ -126,7 +128,7 @@ template<typename TIME> class PersonalDevice{
         }
 
         friend std::ostringstream& operator<<(std::ostringstream& os, const typename PersonalDevice<TIME>::state_type& i) {
-            os << "sending: " << i.sending << " & data: " << i.data;
+            os << "sending: " << i.sending << " & data: " << i.data << " & ack: " << i.ack;
             return os;
         }
 };

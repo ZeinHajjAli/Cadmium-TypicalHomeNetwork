@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Models>
+
+	<Model name="THN" type="coupled" description="Model of a typical home network">
+		<Inputs>
+			<Port name="userInput" type="integer" description="dummy value representing data to be sent to the internet"/>
+		</Inputs>
+		<Outputs>
+			<Port name="userResponse" type="integer" description="data value user is shown when the request has been sent to the internet"/>
+			<Port name="inetSent" type="Message_t" description="user message sent to the internet"/>
+		</Outputs>
+		<Files>
+			<File name="main.cpp" type="CPP" location="/top_model"/>
+			<File name="input_thn_0.txt" type="TXT" location="/input_data"/>
+			<File name="input_thn_1.txt" type="TXT" location="/input_data"/>
+			<File name="THN_output_messages.txt" type="TXT" location="/simulation_results"/>
+			<File name="THN_output_state.txt" type="TXT" location="/simulation_results"/>
+		</Files>
+	</Model>
+
+	<Model name="MRC" type="coupled" description="Modem/Router Combo model">
+		<Inputs>
+			<Port name="request" type="Message_t" description="Message request to be sent to the internet"/>
+		</Inputs>
+		<Outputs>
+			<Port name="response" type="Message_t" description="Acknowledgment message"/>
+			<Port name="inetSent" type="Message_t" description="user message sent to the internet"/>
+		</Outputs>
+		<Files>
+			<File name="main_MRC_test.cpp" type="CPP" location="/test"/>
+			<File name="MRC_input_test_request_In.txt" type="TXT" location="/input_data"/>
+			<File name="MRC_test_output_messages.txt" type="TXT" location="/simulation_results"/>
+			<File name="MRC_test_output_state.txt" type="TXT" location="/simulation_results"/>
+		</Files>
+	</Model>
+
+	<Model name="Modem" type="atomic" description="Modem model that takes a message and tries to send it to the internet">
+		<Inputs>
+			<Port name="modemIn" type="Message_t" description="Message request to be sent to the internet"/>
+		</Inputs>
+		<Outputs>
+			<Port name="modemOut1" type="Message_t" description="Acknowledgment message"/>
+			<Port name="modemOut2" type="Message_t" description="user message sent to the internet"/>
+		</Outputs>
+		<Files>
+			<File name="main_modem_test.cpp" type="CPP" location="/test"/>
+			<File name="modem_input_test_modemIn_In.txt" type="TXT" location="/input_data"/>
+			<File name="modem_test_output_messages.txt" type="TXT" location="/simulation_results"/>
+			<File name="modem_test_output_state.txt" type="TXT" location="/simulation_results"/>
+		</Files>
+	</Model>
+
+	<Model name="Router" type="atomic" description="Router model that sends messages back and forth from the LAN to the modem">
+		<Inputs>
+			<Port name="lanIn" type="Message_t" description="Message request to be sent to the modem"/>
+			<Port name="routerIn" type="Message_t" description="Message request to be sent to the LAN"/>
+		</Inputs>
+		<Outputs>
+			<Port name="lanOut" type="Message_t" description="Messages that are sent to the Lan"/>
+			<Port name="routerOut" type="Message_t" description="Messages that are sent to the Modem"/>
+		</Outputs>
+		<Files>
+			<File name="main_router_test.cpp" type="CPP" location="/test"/>
+			<File name="router_input_test_lan_In.txt" type="TXT" location="/input_data"/>
+			<File name="router_input_test_router_In.txt" type="TXT" location="/input_data"/>
+			<File name="router_test_output_messages.txt" type="TXT" location="/simulation_results"/>
+			<File name="router_test_output_state.txt" type="TXT" location="/simulation_results"/>
+		</Files>
+	</Model>
+
+	<Model name="PersonalDevice" type="atomic" description="Personal Device that requests to send a message to the internet and waits for an acknowledgment">
+		<Inputs>
+			<Port name="userInput" type="integer" description="Data to be sent to the internet"/>
+			<Port name="response" type="Message_t" description="Acknowledgment from the MRC"/>
+		</Inputs>
+		<Outputs>
+			<Port name="request" type="Message_t" description="Messages with data that is to be sent to the internet"/>
+			<Port name="userResponse" type="Message_t" description="Data user sees as an acknowledgment"/>
+		</Outputs>
+		<Files>
+			<File name="main_personalDevice_test.cpp" type="CPP" location="/test"/>
+			<File name="personalDevice_input_test_response_In.txt" type="TXT" location="/input_data"/>
+			<File name="personalDevice_input_test_userInput_In.txt" type="TXT" location="/input_data"/>
+			<File name="personalDevice_test_output_messages.txt" type="TXT" location="/simulation_results"/>
+			<File name="personalDevice_test_output_state.txt" type="TXT" location="/simulation_results"/>
+		</Files>
+	</Model>
+
+</Models>

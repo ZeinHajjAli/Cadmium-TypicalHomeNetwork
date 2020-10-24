@@ -1,0 +1,52 @@
+00:00:00:000
+State for model input_reader is next time: 00:00:00:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 0
+State for model modem1 is model_active: 0 & sending: 0 & message: 0 0
+00:00:00:000
+State for model input_reader is next time: 00:00:13:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 0
+State for model modem1 is model_active: 0 & sending: 0 & message: 0 0
+00:00:13:000
+State for model input_reader is next time: 00:00:23:000
+State for model router1 is sending: 1 & sendingLan: 0 & data: 5
+State for model modem1 is model_active: 0 & sending: 0 & message: 0 0
+00:00:18:000
+State for model input_reader is next time: 00:00:23:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 5
+State for model modem1 is model_active: 1 & sending: 0 & message: 1 5
+00:00:36:000
+State for model input_reader is next time: 00:01:05:000
+State for model router1 is sending: 1 & sendingLan: 0 & data: 2
+State for model modem1 is model_active: 1 & sending: 0 & message: 1 5
+00:00:41:000
+State for model input_reader is next time: 00:01:05:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 2
+State for model modem1 is model_active: 1 & sending: 0 & message: 1 5
+00:00:48:000
+State for model input_reader is next time: 00:01:05:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 2
+State for model modem1 is model_active: 0 & sending: 0 & message: 1 5
+00:01:41:000
+State for model input_reader is next time: 00:00:19:000
+State for model router1 is sending: 1 & sendingLan: 0 & data: 3
+State for model modem1 is model_active: 0 & sending: 0 & message: 1 5
+00:01:46:000
+State for model input_reader is next time: 00:00:19:000
+State for model router1 is sending: 0 & sendingLan: 0 & data: 3
+State for model modem1 is model_active: 1 & sending: 1 & message: 1 3
+00:02:00:000
+State for model input_reader is next time: inf
+State for model router1 is sending: 1 & sendingLan: 0 & data: 4
+State for model modem1 is model_active: 1 & sending: 1 & message: 1 3
+00:02:05:000
+State for model input_reader is next time: inf
+State for model router1 is sending: 0 & sendingLan: 0 & data: 4
+State for model modem1 is model_active: 1 & sending: 1 & message: 1 3
+00:02:07:000
+State for model input_reader is next time: inf
+State for model router1 is sending: 1 & sendingLan: 1 & data: 3
+State for model modem1 is model_active: 0 & sending: 0 & message: 1 3
+00:02:12:000
+State for model input_reader is next time: inf
+State for model router1 is sending: 0 & sendingLan: 1 & data: 3
+State for model modem1 is model_active: 0 & sending: 0 & message: 1 3
