@@ -16,7 +16,7 @@ This is a model of a Typical Home Network implemented in Cadmium
 - input_data [*This folder contains all the input data to run the model and the tests*]
 	- WIP
 - simulation_results [*This folder will be created automatically the first time you compile the poject. It will store the outputs from your simulations and tests*]
-- test [*This folder the unit test of the atomic models*]
+- test [*This folder contains the unit tests of the atomic models*]
 	- WIP
 - top_model [*This folder contains the Typical Home Network top model*]	
 	- WIP
